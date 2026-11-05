@@ -2,7 +2,7 @@
 
 A Vanilla Psycasts Expanded path that summons short-lived telekinetic hands. The hands work, rescue or fight on their own: they're very fast, they ignore terrain movement cost, and they vanish after a short time. Inspired by the summons in A RimWorld of Magic: the minions that haul and clean, and the spirit wolves that fight.
 
-Status: **all 9 psycasts built on 2026-11-03 (Miner Hands added the same day). It compiles and the XML resolves. Playtest round 1 (Busy Hands) ran on 2026-11-03; see the playtest log. Miner Hands is untested.** Final art (icons, hand sprite, path background) was done the same day; the Workshop preview and mod icon are still to do. Target: RimWorld 1.6. Tab: `Arcanum` (shared with Spatialist; was `Arcane` until 2026-11-05).
+Status: **all 9 psycasts built on 2026-11-03 (Miner Hands added the same day). It compiles and the XML resolves. Playtest round 1 (Busy Hands) ran on 2026-11-03; see the playtest log. Miner Hands is untested.** Final art (icons, hand sprite, path background) was done the same day; the Workshop preview and mod icon are still to do. Published on the Steam Workshop 2026-11-05 as **3834210546** (https://steamcommunity.com/sharedfiles/filedetails/?id=3834210546). Target: RimWorld 1.6. Tab: `Arcanum` (shared with Spatialist; was `Arcane` until 2026-11-05).
 
 General paths, tooling and research notes live in [../Private/Mods.md](../Private/Mods.md) (local only, not in the repo; sections "Temporary / autonomous worker pawns" and "Vanilla 1.6 summoned-worker research").
 
