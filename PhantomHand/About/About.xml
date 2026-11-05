@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>VPE - Phantom Hand</name>
+	<author>darky</author>
+	<packageId>darky.vpe.phantomhand</packageId>
+	<modVersion>0.1.0</modVersion>
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+	<description>A Vanilla Psycasts Expanded path that summons short-lived hands of telekinetic force to work, rescue and fight on their own. Mud and shallow water don't slow them, and they fade within an in-game hour. The caster's psychic sensitivity sets how many come, how fast they move and how skilled they are.
+
+Psycasts:
+- Busy Hands: hands that haul to storage anywhere on the map, following your hauling priorities.
+- Timber Hands: hands that cut trees and plants marked for cutting.
+- Phantom Construction Crew: hands that build, deliver materials and repair. Their skill sets build quality.
+- Miner Hands: hands that mine marked rock and ore.
+- Telekinetic Aura: a toggle that summons a working hand every 20 seconds for whatever work is waiting. It locks 30 of the caster's neural heat while it lasts.
+- Rescue Hands: hands that carry downed allies to hospital beds, even with enemies nearby.
+- Grasping Hands: seize every enemy in an area for about 10 seconds. They can barely move, and their aim suffers.
+- Thousand Palms: battle hands that block bullets, strike fast and shove enemies back.
+- The Hundred-Handed: a swarm of up to 40 hands that fights and rescues during a raid and works otherwise. Once per day.
+
+Good to know:
+- Hands add nothing to colony wealth, send no letters and leave no corpses.
+- The work and rescue psycasts can be cast without drafting.
+- Hands vanish if their caster is downed, dies or leaves the map.
+- Requires Biotech: the hands run on the mechanoid work system, with no mechanitor or bandwidth needed.
+- Find it on VPE's Arcanum tab.
+
+Inspired by the summons of A RimWorld of Magic.</description>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+		</li>
+		<li>
+			<packageId>OskarPotocki.VanillaFactionsExpanded.Core</packageId>
+			<displayName>Vanilla Expanded Framework</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2023507013</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>VanillaExpanded.VPsycastsE</packageId>
+			<displayName>Vanilla Psycasts Expanded</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2842502659</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>Ludeon.RimWorld.Biotech</packageId>
+			<displayName>Biotech</displayName>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>Ludeon.RimWorld</li>
+		<li>Ludeon.RimWorld.Royalty</li>
+		<li>Ludeon.RimWorld.Biotech</li>
+		<li>Ludeon.RimWorld.Odyssey</li>
+		<li>brrainz.harmony</li>
+		<li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+		<li>VanillaExpanded.VPsycastsE</li>
+		<li>darky.vpe.spatialist</li>
+	</loadAfter>
+</ModMetaData>

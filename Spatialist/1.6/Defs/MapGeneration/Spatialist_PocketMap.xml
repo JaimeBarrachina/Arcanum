@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<MapGeneratorDef>
+		<defName>Spatialist_PocketMap</defName>
+		<label>pocket dimension</label>
+		<isUnderground>true</isUnderground>
+		<disableCallAid>true</disableCallAid>
+		<ignoreAreaRevealedLetter>true</ignoreAreaRevealedLetter>
+		<pocketMapProperties>
+			<biome>Underground</biome>
+			<temperature>15</temperature>
+			<!-- The pocket outlives whatever map its gate was last opened on (gravship launches, abandoned bases). -->
+			<destroyOnParentMapAbandoned>false</destroyOnParentMapAbandoned>
+			<canBeCleaned>true</canBeCleaned>
+		</pocketMapProperties>
+		<genSteps>
+			<li>Spatialist_PocketRoom</li>
+		</genSteps>
+	</MapGeneratorDef>
+
+	<GenStepDef>
+		<defName>Spatialist_PocketRoom</defName>
+		<order>10</order>
+		<genStep Class="Spatialist.GenStep_PocketRoom">
+			<floor>Slate_Smooth</floor>
+			<roof>RoofRockThick</roof>
+			<exitDef>Spatialist_PocketExit</exitDef>
+			<!-- The map is 45x45 (WorldComponent_PocketDimensions.PocketSize); everything outside the open middle is wall. -->
+			<wallDef>Spatialist_PocketWall</wallDef>
+			<openSize>15</openSize>
+		</genStep>
+	</GenStepDef>
+
+</Defs>

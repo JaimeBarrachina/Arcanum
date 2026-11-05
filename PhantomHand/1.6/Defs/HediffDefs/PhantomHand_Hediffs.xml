@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- Grasping Hands. Moving is capped just above the 0.15 at which a pawn is downed, so this pins rather than downs. -->
+	<HediffDef>
+		<defName>PH_Grasped</defName>
+		<label>phantom grip</label>
+		<description>Telekinetic hands are holding this creature in place. It can barely move, and its hands and aim are hampered.</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<isBad>true</isBad>
+		<defaultLabelColor>(0.6, 0.85, 1.0)</defaultLabelColor>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>600~600</disappearsAfterTicks>
+				<showRemainingTime>true</showRemainingTime>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<capMods>
+					<li>
+						<capacity>Moving</capacity>
+						<setMax>0.2</setMax>
+					</li>
+					<li>
+						<capacity>Manipulation</capacity>
+						<postFactor>0.6</postFactor>
+					</li>
+				</capMods>
+				<statFactors>
+					<AimingDelayFactor>1.5</AimingDelayFactor>
+				</statFactors>
+			</li>
+		</stages>
+	</HediffDef>
+
+	<!-- Telekinetic Aura, on the caster. VPE keeps the caster's neural heat at or above minHeat while it lasts. -->
+	<HediffDef>
+		<defName>PH_TelekineticAura</defName>
+		<label>telekinetic aura</label>
+		<description>A sustained telekinetic field. Working hands keep forming out of it while it lasts, and it holds part of the caster's neural heat locked in place.</description>
+		<hediffClass>PhantomHand.Hediff_TelekineticAura</hediffClass>
+		<isBad>false</isBad>
+		<initialSeverity>1</initialSeverity>
+		<maxSeverity>1</maxSeverity>
+		<defaultLabelColor>(0.6, 0.85, 1.0)</defaultLabelColor>
+		<modExtensions>
+			<li Class="PhantomHand.AuraExtension">
+				<sources>
+					<li>PH_BusyHands</li>
+					<li>PH_TimberHands</li>
+					<li>PH_ConstructionCrew</li>
+					<li>PH_MinerHands</li>
+				</sources>
+				<intervalTicks>1200</intervalTicks>
+				<minHeat>30</minHeat>
+				<maxHands>
+					<points>
+						<li>(0.5, 2)</li>
+						<li>(1, 3)</li>
+						<li>(2, 5)</li>
+						<li>(3, 6)</li>
+					</points>
+				</maxHands>
+			</li>
+		</modExtensions>
+	</HediffDef>
+
+</Defs>

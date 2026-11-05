@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<!-- Spatial Pockets (+100 kg) and worn Spatial Bags. VEF makes this stat the pawn's inventory and caravan mass capacity. -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/StatDef[defName="VEF_MassCarryCapacity"]/parts</xpath>
+		<value>
+			<li Class="Spatialist.StatPart_Spatialist">
+				<pocketsOffset>100</pocketsOffset>
+				<countBags>true</countBags>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- Spatial Pockets also doubles how much is hauled per trip (base 75). -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/StatDef[defName="CarryingCapacity"]/parts</xpath>
+		<value>
+			<li Class="Spatialist.StatPart_Spatialist">
+				<pocketsOffset>75</pocketsOffset>
+				<countBags>false</countBags>
+			</li>
+		</value>
+	</Operation>
+
+</Patch>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>VPE - Spatialist</name>
+	<author>darky</author>
+	<packageId>darky.vpe.spatialist</packageId>
+	<modVersion>0.1.0</modVersion>
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+	<description>A Vanilla Psycasts Expanded path built around a personal pocket dimension, a small room of folded space. The caster opens a gate to it wherever they stand, and anyone can walk through, so it doubles as storage that travels with its maker.
+
+Psycasts:
+- Pocket Gate: open a gate to your pocket a few steps away. Use it again to close it. The pocket and everything in it last as long as the caster lives.
+- Spatial Pockets (passive): +100 kg carrying capacity for inventory and caravans, and +75 kg per hauling trip.
+- Stash: skip an item stack into the pocket without opening the gate. Cast from inside the pocket, it skips items out next to the gate, which must be open.
+- Displace: Stash for every item in a 3x3 area.
+- Expand Pocket: grow the pocket from 15x15 to 25x25, 35x35 and finally 45x45.
+- Sanctuary: skip the caster and every colonist, guest and prisoner within 5 cells into the pocket.
+- Spatial Bag: make a backpack that adds 100 kg of carrying capacity at 100% psychic sensitivity, scaling with the caster's sensitivity. It costs 200 neural heat, so turn the heat limiter off to cast it.
+
+Good to know:
+- Closing the gate skips anyone still inside out next to it.
+- If the caster dies, the pocket collapses and its contents spill out near the body.
+- The gate closes when a gravship takes off; the pocket itself is kept.
+- Find it on VPE's Arcanum tab.</description>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+		</li>
+		<li>
+			<packageId>OskarPotocki.VanillaFactionsExpanded.Core</packageId>
+			<displayName>Vanilla Expanded Framework</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2023507013</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>VanillaExpanded.VPsycastsE</packageId>
+			<displayName>Vanilla Psycasts Expanded</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2842502659</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>Ludeon.RimWorld</li>
+		<li>Ludeon.RimWorld.Royalty</li>
+		<li>Ludeon.RimWorld.Odyssey</li>
+		<li>brrainz.harmony</li>
+		<li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+		<li>VanillaExpanded.VPsycastsE</li>
+	</loadAfter>
+</ModMetaData>

@@ -1,0 +1,14 @@
+# Personal notes and logs, not part of the Arcanum mods
+/Mods.md
+/bugs.txt
+/EpochsGolemsTweaks/
+
+# Build output
+**/bin/
+**/obj/
+.vs/
+*.user
+__pycache__/
+
+# Codex image-generation session logs
+*.codex.log

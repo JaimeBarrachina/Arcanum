@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- Every hand runs this tree. Branches are switched on per race by PhantomHand.PhantomHandProps
+	     (and, for the Hundred-Handed, by whether the map has an active threat). -->
+	<ThinkTreeDef>
+		<defName>PH_HandThinkTree</defName>
+		<thinkRoot Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="ThinkNode_Subtree">
+					<treeDef>Despawned</treeDef>
+				</li>
+				<li Class="ThinkNode_Subtree">
+					<treeDef>Downed</treeDef>
+				</li>
+				<li Class="ThinkNode_QueuedJob" />
+
+				<li Class="PhantomHand.ThinkNode_ConditionalHandRole">
+					<role>Rescue</role>
+					<subNodes>
+						<li Class="PhantomHand.JobGiver_PhantomRescue" />
+					</subNodes>
+				</li>
+
+				<li Class="PhantomHand.ThinkNode_ConditionalHandRole">
+					<role>Fight</role>
+					<subNodes>
+						<li Class="JobGiver_AIFightEnemies">
+							<targetAcquireRadius>65</targetAcquireRadius>
+							<targetKeepRadius>72</targetKeepRadius>
+						</li>
+					</subNodes>
+				</li>
+
+				<li Class="PhantomHand.ThinkNode_ConditionalHandRole">
+					<role>Work</role>
+					<subNodes>
+						<li Class="JobGiver_Work">
+							<emergency>true</emergency>
+						</li>
+						<li Class="JobGiver_Work" />
+					</subNodes>
+				</li>
+
+				<li Class="ThinkNode_Tagger">
+					<tagToGive>Idle</tagToGive>
+					<subNodes>
+						<li Class="PhantomHand.JobGiver_WanderNearCaster">
+							<maxDanger>Deadly</maxDanger>
+						</li>
+					</subNodes>
+				</li>
+				<li Class="JobGiver_IdleError" />
+			</subNodes>
+		</thinkRoot>
+	</ThinkTreeDef>
+
+</Defs>

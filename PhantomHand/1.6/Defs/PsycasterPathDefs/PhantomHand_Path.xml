@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<VanillaPsycastsExpanded.PsycasterPathDef>
+		<defName>PH_PhantomHandPath</defName>
+		<label>phantom hand</label>
+		<description>Phantom hands shape raw telekinetic force into hands that work, rescue and fight on their own.</description>
+		<background>PhantomHand/UI/PathBackground</background>
+		<altBackground>PhantomHand/UI/PathBackground</altBackground>
+		<!-- VPE groups paths by this exact string and uses it as the tab label; shared with Spatialist. -->
+		<tab>Arcanum</tab>
+		<tooltip>Phantom hands summon short-lived telekinetic hands that haul, cut, build, carry the wounded and fight for the colony. Mud and shallow water don't slow them, and they fade within an in-game hour. The caster's psychic sensitivity sets how many come, how fast they move and how skilled they are.</tooltip>
+	</VanillaPsycastsExpanded.PsycasterPathDef>
+
+</Defs>

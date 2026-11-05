@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<VanillaPsycastsExpanded.PsycasterPathDef>
+		<defName>Spatialist_Path</defName>
+		<label>spatialist</label>
+		<description>Spatialists fold space into pockets of their own, carrying a private room with them wherever they go.</description>
+		<background>Spatialist/UI/PathBackground</background>
+		<altBackground>Spatialist/UI/PathBackground</altBackground>
+		<!-- VPE groups paths by this exact string and uses it as the tab label, so a new value makes a new tab. -->
+		<tab>Arcanum</tab>
+		<tooltip>Spatialists fold space into a personal pocket dimension and open a gate to it wherever they stand. Anyone can walk through an open gate, so the pocket serves the whole colony as storage that travels with its maker.</tooltip>
+	</VanillaPsycastsExpanded.PsycasterPathDef>
+
+</Defs>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<Spatialist.GateLabel>pocket gate ({0})</Spatialist.GateLabel>
+	<Spatialist.CloseGate>Close gate</Spatialist.CloseGate>
+	<Spatialist.CloseGateDesc>Close this pocket gate. Anyone inside the pocket is skipped out next to it. The pocket and its contents remain.</Spatialist.CloseGateDesc>
+	<Spatialist.GateClosed>The gate outside is closed.</Spatialist.GateClosed>
+	<Spatialist.PocketMissing>This gate isn't connected to a pocket.</Spatialist.PocketMissing>
+	<Spatialist.GateBlocked>The gate needs an open, visible spot with no buildings.</Spatialist.GateBlocked>
+	<Spatialist.NeedMap>Can only be cast on a map.</Spatialist.NeedMap>
+	<Spatialist.CantOpenInPocket>Can't open a gate from inside a pocket map.</Spatialist.CantOpenInPocket>
+	<Spatialist.EvacuateConfirm>The gate is closed, and a gate can't be opened from inside the pocket.\n\nSkip everyone in {0}'s pocket out to the nearest colony map?</Spatialist.EvacuateConfirm>
+	<Spatialist.NowhereToGo>There is no map to skip out to.</Spatialist.NowhereToGo>
+	<Spatialist.CollapsedLabel>Pocket collapsed</Spatialist.CollapsedLabel>
+	<Spatialist.NoPocketYet>The caster has no pocket dimension yet. Cast Pocket Gate first.</Spatialist.NoPocketYet>
+	<Spatialist.MustBeOutside>Must be cast from outside a pocket map.</Spatialist.MustBeOutside>
+	<Spatialist.GateClosedNoWayOut>Inside the pocket, items can only be skipped out through an open gate. Open the gate first.</Spatialist.GateClosedNoWayOut>
+	<Spatialist.AlreadyInPocket>The caster is already inside their own pocket.</Spatialist.AlreadyInPocket>
+	<Spatialist.NotStashable>Only loose items can be stashed.</Spatialist.NotStashable>
+	<Spatialist.NothingToDisplace>There's nothing there to displace.</Spatialist.NothingToDisplace>
+	<Spatialist.PocketMaxed>This pocket can't grow any further.</Spatialist.PocketMaxed>
+	<Spatialist.PocketExpanded>{0}'s pocket has grown to {1}x{1}.</Spatialist.PocketExpanded>
+	<Spatialist.Passive>Passive: always active once learned.</Spatialist.Passive>
+	<Spatialist.StatPockets>Spatial pockets</Spatialist.StatPockets>
+	<Spatialist.StatBag>Spatial bag</Spatialist.StatBag>
+	<Spatialist.BagLabel>{0} ({1} kg)</Spatialist.BagLabel>
+	<Spatialist.BagInspect>Carrying capacity when worn: +{0} kg</Spatialist.BagInspect>
+	<Spatialist.CollapsedText>With {0} gone, their pocket dimension has collapsed. Everything that was inside has spilled out.</Spatialist.CollapsedText>
+</LanguageData>

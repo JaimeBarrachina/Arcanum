@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>Spatialist_PocketGate</defName>
+		<label>pocket gate</label>
+		<description>Open a gate to the caster's personal pocket dimension at a nearby spot. Anyone can walk through it, and haulers can carry items in and out.\n\nUse it again while the gate is open to close it instantly, at no cost. Anyone still inside is skipped out next to the gate.\n\nThe pocket and everything in it persist for as long as the caster lives. When the caster dies, the pocket collapses and its contents spill out.</description>
+		<iconPath>Spatialist/Abilities/PocketGate</iconPath>
+		<abilityClass>Spatialist.Ability_PocketGate</abilityClass>
+		<targetMode>Location</targetMode>
+		<showUndrafted>true</showUndrafted>
+		<range>5.9</range>
+		<castTime>60</castTime>
+		<chance>0</chance>
+		<castSound>VPE_SkipGate_Cast</castSound>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>Spatialist_Path</path>
+				<level>1</level>
+				<order>1</order>
+				<psyfocusCost>0.05</psyfocusCost>
+				<entropyGain>0</entropyGain>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+	<!-- Tree layout: VPE rows hold 1-3 slots (x = 0 | -29,+29 | -51,0,+51) and can't start with a blank, so
+	     spaceAfter is used to place icons. Card, bottom to top:
+	       L1 Pocket Gate (centre)
+	       L2 Stash (left), Spatial Pockets (right)
+	       L3 Displace (left), Expand Pocket (centre)
+	       L4 Sanctuary (left of centre, after Expand)
+	       L5 Spatial Bag (centre, after Spatial Pockets)
+	     No lines cross or run under an icon; re-check before adding or moving a psycast. -->
+
+	<!-- Passive: the effect is StatPart_Spatialist (see Patches/Spatialist_Stats.xml); this def only marks it as learned. -->
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>Spatialist_SpatialPockets</defName>
+		<label>spatial pockets</label>
+		<description>Passive. The psychic keeps small folds of space about their person, letting them carry far more: +100 kg carrying capacity (inventory and caravans), and they haul more in each trip.</description>
+		<iconPath>Spatialist/Abilities/SpatialPockets</iconPath>
+		<abilityClass>Spatialist.Ability_Passive</abilityClass>
+		<targetMode>Self</targetMode>
+		<chance>0</chance>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>Spatialist_Path</path>
+				<level>2</level>
+				<order>2</order>
+				<psyfocusCost>0</psyfocusCost>
+				<entropyGain>0</entropyGain>
+				<prerequisites>
+					<li>Spatialist_PocketGate</li>
+				</prerequisites>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>Spatialist_Stash</defName>
+		<label>stash</label>
+		<description>Skip one stack of items straight into the caster's pocket dimension, without opening the gate. Items land around the pocket's exit.\n\nCast from inside the pocket, it works in reverse: the stack is skipped out next to the gate, which must be open.\n\nRequires the pocket to exist (cast Pocket Gate at least once).</description>
+		<iconPath>Spatialist/Abilities/Stash</iconPath>
+		<abilityClass>Spatialist.Ability_Stash</abilityClass>
+		<targetMode>Thing</targetMode>
+		<showUndrafted>true</showUndrafted>
+		<range>24.9</range>
+		<castTime>30</castTime>
+		<chance>0</chance>
+		<castSound>Psycast_Skip_Entry</castSound>
+		<targetingParameters>
+			<canTargetItems>true</canTargetItems>
+			<canTargetPawns>false</canTargetPawns>
+			<canTargetBuildings>false</canTargetBuildings>
+			<canTargetLocations>false</canTargetLocations>
+			<mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+		</targetingParameters>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>Spatialist_Path</path>
+				<level>2</level>
+				<order>1</order>
+				<spaceAfter>true</spaceAfter>
+				<psyfocusCost>0.02</psyfocusCost>
+				<entropyGain>6</entropyGain>
+				<prerequisites>
+					<li>Spatialist_PocketGate</li>
+				</prerequisites>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>Spatialist_Displace</defName>
+		<label>displace</label>
+		<description>Skip every stack of items in a small 3x3 area into the caster's pocket dimension at once. Items land around the pocket's exit.\n\nCast from inside the pocket, it works in reverse: everything in the area is skipped out next to the gate, which must be open.\n\nRequires the pocket to exist (cast Pocket Gate at least once).</description>
+		<iconPath>Spatialist/Abilities/Displace</iconPath>
+		<abilityClass>Spatialist.Ability_Displace</abilityClass>
+		<targetMode>Location</targetMode>
+		<showUndrafted>true</showUndrafted>
+		<range>24.9</range>
+		<radius>1.5</radius>
+		<castTime>60</castTime>
+		<chance>0</chance>
+		<castSound>Psycast_Skip_Entry</castSound>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>Spatialist_Path</path>
+				<level>3</level>
+				<order>1</order>
+				<psyfocusCost>0.06</psyfocusCost>
+				<entropyGain>18</entropyGain>
+				<prerequisites>
+					<li>Spatialist_Stash</li>
+				</prerequisites>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>Spatialist_ExpandPocket</defName>
+		<label>expand pocket</label>
+		<description>Push back the walls of the caster's pocket dimension, opening the next ring of space and lighting it with amethyst crystals. Each cast grows the pocket from 15x15 to 25x25, 35x35 and finally 45x45.\n\nPockets made before this psycast existed can't grow.</description>
+		<iconPath>Spatialist/Abilities/ExpandPocket</iconPath>
+		<abilityClass>Spatialist.Ability_ExpandPocket</abilityClass>
+		<targetMode>Self</targetMode>
+		<showUndrafted>true</showUndrafted>
+		<castTime>300</castTime>
+		<chance>0</chance>
+		<castSound>VPE_SkipGate_Cast</castSound>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>Spatialist_Path</path>
+				<level>3</level>
+				<order>2</order>
+				<spaceAfter>true</spaceAfter>
+				<psyfocusCost>0.5</psyfocusCost>
+				<entropyGain>40</entropyGain>
+				<prerequisites>
+					<li>Spatialist_PocketGate</li>
+				</prerequisites>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>Spatialist_Sanctuary</defName>
+		<label>sanctuary</label>
+		<description>Skip the caster and everyone friendly around them (colonists, prisoners, colony animals and mechanoids) into the caster's pocket dimension. The gate doesn't need to be open, but someone has to open it again to get back out.\n\nRequires the pocket to exist (cast Pocket Gate at least once).</description>
+		<iconPath>Spatialist/Abilities/Sanctuary</iconPath>
+		<abilityClass>Spatialist.Ability_Sanctuary</abilityClass>
+		<targetMode>Self</targetMode>
+		<showUndrafted>true</showUndrafted>
+		<radius>4.9</radius>
+		<castTime>30</castTime>
+		<chance>0</chance>
+		<castSound>Psycast_Skip_Pulse</castSound>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>Spatialist_Path</path>
+				<level>4</level>
+				<order>1</order>
+				<spaceAfter>true</spaceAfter>
+				<psyfocusCost>0.3</psyfocusCost>
+				<entropyGain>35</entropyGain>
+				<prerequisites>
+					<li>Spatialist_ExpandPocket</li>
+				</prerequisites>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>Spatialist_SpatialBag</defName>
+		<label>spatial bag</label>
+		<description>Fold a permanent pocket of space into a wearable bag. Whoever wears it gains 100 kg of carrying capacity (inventory and caravans), multiplied by the caster's psychic sensitivity at the moment it's made. It takes the backpack slot.\n\nThe fold is violent: it costs far more neural heat than any psychic can safely hold. Switch off the neural heat limiter to cast it, and expect a psychic breakdown.</description>
+		<iconPath>Spatialist/Abilities/SpatialBag</iconPath>
+		<abilityClass>Spatialist.Ability_SpatialBag</abilityClass>
+		<targetMode>Self</targetMode>
+		<showUndrafted>true</showUndrafted>
+		<castTime>600</castTime>
+		<chance>0</chance>
+		<castSound>VPE_SkipGate_Cast</castSound>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>Spatialist_Path</path>
+				<level>5</level>
+				<order>1</order>
+				<psyfocusCost>0.8</psyfocusCost>
+				<entropyGain>200</entropyGain>
+				<prerequisites>
+					<li>Spatialist_SpatialPockets</li>
+				</prerequisites>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+</Defs>

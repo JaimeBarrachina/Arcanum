@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- Phantom hands are mechanoids WITHOUT CompProperties_OverseerSubject. That makes them IsColonyMech, so vanilla
+	     work givers accept them and race.mechEnabledWorkTypes limits their work, with no mechanitor, bandwidth, energy
+	     or feral checks. Deliberately not parented to BaseMechanoid, which adds the overseer, dormancy and repair comps.
+	     mechFixedSkillLevel is 20 so vanilla's construction skill gate always passes; Patch_GenConstruct_CanConstruct
+	     applies the hand's real summoned level instead. -->
+	<ThingDef ParentName="BasePawn" Name="PH_HandBase" Abstract="True">
+		<thingClass>PhantomHand.Pawn_PhantomHand</thingClass>
+		<soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+		<tradeability>None</tradeability>
+		<statBases>
+			<MarketValue>0</MarketValue>
+			<Mass>5</Mass>
+			<MoveSpeed>8</MoveSpeed>
+			<!-- Scaled by body size 0.5: a hand hauls 75 per trip, like a colonist. -->
+			<CarryingCapacity>150</CarryingCapacity>
+			<PsychicSensitivity>0</PsychicSensitivity>
+			<ToxicResistance>1</ToxicResistance>
+			<ToxicEnvironmentResistance>1</ToxicEnvironmentResistance>
+			<Flammability>0</Flammability>
+			<ComfyTemperatureMin>-200</ComfyTemperatureMin>
+			<ComfyTemperatureMax>500</ComfyTemperatureMax>
+			<MeatAmount>0</MeatAmount>
+			<ArmorRating_Blunt>0.20</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.20</ArmorRating_Sharp>
+			<ArmorRating_Heat>2.00</ArmorRating_Heat>
+			<WorkSpeedGlobal>1</WorkSpeedGlobal>
+			<BandwidthCost>0</BandwidthCost>
+		</statBases>
+		<race>
+			<fleshType>Mechanoid</fleshType>
+			<intelligence>ToolUser</intelligence>
+			<thinkTreeMain>PH_HandThinkTree</thinkTreeMain>
+			<body>Mech_Light</body>
+			<baseBodySize>0.5</baseBodySize>
+			<baseHealthScale>0.5</baseHealthScale>
+			<needsRest>false</needsRest>
+			<hasGenders>false</hasGenders>
+			<foodType>None</foodType>
+			<lifeExpectancy>2500</lifeExpectancy>
+			<mechWeightClass>Light</mechWeightClass>
+			<mechFixedSkillLevel>20</mechFixedSkillLevel>
+			<deathAction Class="DeathActionProperties_Vanish">
+				<workerClass>DeathActionWorker_Vanish</workerClass>
+				<fleck>PsycastSkipInnerExit</fleck>
+			</deathAction>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+				</li>
+			</lifeStageAges>
+			<soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding_Generic</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+		</race>
+		<tools>
+			<li>
+				<label>fingers</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>3</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+		</tools>
+	</ThingDef>
+
+	<!-- isFighter / allowInMechClusters false: vanilla mech clusters, sleeping-mech complexes and ancient shrines pick from
+	     every mechanoid kind that allows it, and hands must never spawn there. -->
+	<PawnKindDef Name="PH_HandKindBase" Abstract="True">
+		<combatPower>5</combatPower>
+		<isFighter>false</isFighter>
+		<allowInMechClusters>false</allowInMechClusters>
+		<ecoSystemWeight>0</ecoSystemWeight>
+		<forceDeathOnDowned>true</forceDeathOnDowned>
+		<forceNoDeathNotification>true</forceNoDeathNotification>
+		<destroyGearOnDrop>true</destroyGearOnDrop>
+		<canStrip>false</canStrip>
+		<preventIdeo>true</preventIdeo>
+	</PawnKindDef>
+
+	<!-- ============ Busy Hands: hauling ============ -->
+	<ThingDef ParentName="PH_HandBase">
+		<defName>PH_BusyHand</defName>
+		<label>busy hand</label>
+		<description>A short-lived hand of telekinetic force. It hauls items to storage, following the colony's hauling priorities, and fades after a while.</description>
+		<race>
+			<mechEnabledWorkTypes>
+				<li>Hauling</li>
+			</mechEnabledWorkTypes>
+		</race>
+		<modExtensions>
+			<li Class="PhantomHand.PhantomHandProps">
+				<work>true</work>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<PawnKindDef ParentName="PH_HandKindBase">
+		<defName>PH_BusyHand</defName>
+		<label>busy hand</label>
+		<race>PH_BusyHand</race>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>PhantomHand/Things/Hand</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>TransparentPostLight</shaderType>
+					<color>(0.45, 0.78, 1.0)</color>
+					<drawSize>1.0</drawSize>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+	</PawnKindDef>
+
+	<!-- ============ Timber Hands: plant cutting ============ -->
+	<ThingDef ParentName="PH_HandBase">
+		<defName>PH_TimberHand</defName>
+		<label>timber hand</label>
+		<description>A short-lived hand of telekinetic force. It cuts trees and plants marked for cutting, and fades after a while.</description>
+		<race>
+			<mechEnabledWorkTypes>
+				<li>PlantCutting</li>
+			</mechEnabledWorkTypes>
+		</race>
+		<modExtensions>
+			<li Class="PhantomHand.PhantomHandProps">
+				<work>true</work>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<PawnKindDef ParentName="PH_HandKindBase">
+		<defName>PH_TimberHand</defName>
+		<label>timber hand</label>
+		<race>PH_TimberHand</race>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>PhantomHand/Things/Hand</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>TransparentPostLight</shaderType>
+					<color>(0.5, 0.95, 0.5)</color>
+					<drawSize>1.0</drawSize>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+	</PawnKindDef>
+
+	<!-- ============ Phantom Construction Crew: construction ============ -->
+	<ThingDef ParentName="PH_HandBase">
+		<defName>PH_BuilderHand</defName>
+		<label>builder hand</label>
+		<description>A short-lived hand of telekinetic force. It builds, delivers building materials and repairs, and fades after a while.</description>
+		<race>
+			<mechEnabledWorkTypes>
+				<li>Construction</li>
+			</mechEnabledWorkTypes>
+		</race>
+		<modExtensions>
+			<li Class="PhantomHand.PhantomHandProps">
+				<work>true</work>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<PawnKindDef ParentName="PH_HandKindBase">
+		<defName>PH_BuilderHand</defName>
+		<label>builder hand</label>
+		<race>PH_BuilderHand</race>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>PhantomHand/Things/Hand</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>TransparentPostLight</shaderType>
+					<color>(1.0, 0.75, 0.35)</color>
+					<drawSize>1.0</drawSize>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+	</PawnKindDef>
+
+	<!-- ============ Miner Hands: mining (designated rock and veins; vanilla bars mechs from deep drills) ============ -->
+	<ThingDef ParentName="PH_HandBase">
+		<defName>PH_MinerHand</defName>
+		<label>miner hand</label>
+		<description>A short-lived hand of telekinetic force. It digs out rock and ore marked for mining, and fades after a while.</description>
+		<race>
+			<mechEnabledWorkTypes>
+				<li>Mining</li>
+			</mechEnabledWorkTypes>
+		</race>
+		<modExtensions>
+			<li Class="PhantomHand.PhantomHandProps">
+				<work>true</work>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<PawnKindDef ParentName="PH_HandKindBase">
+		<defName>PH_MinerHand</defName>
+		<label>miner hand</label>
+		<race>PH_MinerHand</race>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>PhantomHand/Things/Hand</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>TransparentPostLight</shaderType>
+					<color>(1.0, 0.45, 0.3)</color>
+					<drawSize>1.0</drawSize>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+	</PawnKindDef>
+
+	<!-- ============ Rescue Hands ============ -->
+	<ThingDef ParentName="PH_HandBase">
+		<defName>PH_RescueHand</defName>
+		<label>rescue hand</label>
+		<description>A short-lived hand of telekinetic force. It finds downed allies anywhere on the map and carries them to a hospital bed, even under fire.</description>
+		<modExtensions>
+			<li Class="PhantomHand.PhantomHandProps">
+				<rescue>true</rescue>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<PawnKindDef ParentName="PH_HandKindBase">
+		<defName>PH_RescueHand</defName>
+		<label>rescue hand</label>
+		<race>PH_RescueHand</race>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>PhantomHand/Things/Hand</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>TransparentPostLight</shaderType>
+					<color>(1.0, 0.6, 0.68)</color>
+					<drawSize>1.0</drawSize>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+	</PawnKindDef>
+
+	<!-- ============ Thousand Palms: combat ============ -->
+	<ThingDef ParentName="PH_HandBase" Name="PH_CombatHandBase" Abstract="True">
+		<statBases>
+			<ArmorRating_Blunt>0.35</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.35</ArmorRating_Sharp>
+		</statBases>
+		<race>
+			<baseHealthScale>0.8</baseHealthScale>
+		</race>
+		<tools Inherit="False">
+			<li>
+				<label>fingers</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>7</power>
+				<cooldownTime>0.8</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+			<li>
+				<label>palm</label>
+				<capacities>
+					<li>PH_Shove</li>
+				</capacities>
+				<power>6</power>
+				<cooldownTime>1.6</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+				<chanceFactor>0.5</chanceFactor>
+			</li>
+		</tools>
+	</ThingDef>
+
+	<ThingDef ParentName="PH_CombatHandBase">
+		<defName>PH_PalmHand</defName>
+		<label>palm hand</label>
+		<description>A short-lived hand of telekinetic force, made for battle. It throws a small shield that catches incoming bullets, strikes with rapid blows and shoves enemies back.</description>
+		<comps>
+			<li Class="CompProperties_ProjectileInterceptor">
+				<radius>2</radius>
+				<interceptGroundProjectiles>true</interceptGroundProjectiles>
+				<color>(0.75, 0.55, 1.0)</color>
+				<hitPoints>60</hitPoints>
+				<hitPointsRestoreInstantlyAfterCharge>true</hitPointsRestoreInstantlyAfterCharge>
+				<chargeDurationTicks>900</chargeDurationTicks>
+				<drawWithNoSelection>true</drawWithNoSelection>
+				<disarmedByEmpForTicks>600</disarmedByEmpForTicks>
+				<gizmoTipKey>ProjectileInterceptorTip</gizmoTipKey>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="PhantomHand.PhantomHandProps">
+				<fight>true</fight>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<PawnKindDef ParentName="PH_HandKindBase">
+		<defName>PH_PalmHand</defName>
+		<label>palm hand</label>
+		<race>PH_PalmHand</race>
+		<combatPower>10</combatPower>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>PhantomHand/Things/Hand</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>TransparentPostLight</shaderType>
+					<color>(0.75, 0.5, 1.0)</color>
+					<drawSize>1.1</drawSize>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+	</PawnKindDef>
+
+	<!-- ============ The Hundred-Handed: everything ============ -->
+	<ThingDef ParentName="PH_CombatHandBase">
+		<defName>PH_HundredHand</defName>
+		<label>hundred-handed hand</label>
+		<description>One of a vast swarm of telekinetic hands. While enemies threaten the colony it fights and rescues the wounded; otherwise it hauls, cuts and builds.</description>
+		<race>
+			<mechEnabledWorkTypes>
+				<li>Hauling</li>
+				<li>PlantCutting</li>
+				<li>Construction</li>
+				<li>Mining</li>
+			</mechEnabledWorkTypes>
+		</race>
+		<comps>
+			<li Class="CompProperties_ProjectileInterceptor">
+				<radius>1.5</radius>
+				<interceptGroundProjectiles>true</interceptGroundProjectiles>
+				<color>(1.0, 0.9, 0.55)</color>
+				<hitPoints>30</hitPoints>
+				<hitPointsRestoreInstantlyAfterCharge>true</hitPointsRestoreInstantlyAfterCharge>
+				<chargeDurationTicks>1200</chargeDurationTicks>
+				<drawWithNoSelection>true</drawWithNoSelection>
+				<disarmedByEmpForTicks>600</disarmedByEmpForTicks>
+				<gizmoTipKey>ProjectileInterceptorTip</gizmoTipKey>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="PhantomHand.PhantomHandProps">
+				<rescue>true</rescue>
+				<fight>true</fight>
+				<work>true</work>
+				<switchOnThreat>true</switchOnThreat>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<PawnKindDef ParentName="PH_HandKindBase">
+		<defName>PH_HundredHand</defName>
+		<label>hundred-handed hand</label>
+		<race>PH_HundredHand</race>
+		<combatPower>10</combatPower>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>PhantomHand/Things/Hand</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>TransparentPostLight</shaderType>
+					<color>(1.0, 0.88, 0.45)</color>
+					<drawSize>1.0</drawSize>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+	</PawnKindDef>
+
+</Defs>

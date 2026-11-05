@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<PH.Dismiss>Dismiss</PH.Dismiss>
+	<PH.DismissDesc>Release this hand. It drops whatever it carries and fades away.</PH.DismissDesc>
+	<PH.HandInspect>Fades in {0}. Skill {1}. Summoned by {2}.</PH.HandInspect>
+	<PH.StatSkill>Phantom hand skill level {0}</PH.StatSkill>
+	<PH.StatSpeed>Phantom hand speed</PH.StatSpeed>
+	<PH.NeedMap>The caster must be on a map.</PH.NeedMap>
+	<PH.AuraNoHeatRoom>Not enough neural heat capacity: the aura locks {0} heat.</PH.AuraNoHeatRoom>
+	<PH.AuraActive>The aura is active. Use again to end it.</PH.AuraActive>
+</LanguageData>

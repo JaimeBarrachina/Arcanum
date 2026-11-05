@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- Made only by the Spatial Bag psycast. Capacity is stored per bag (CompSpatialBag) and added by StatPart_Spatialist. -->
+	<ThingDef ParentName="ApparelBase">
+		<defName>Spatialist_SpatialBag</defName>
+		<label>spatial bag</label>
+		<description>A backpack folded out of space itself by a spatialist. It holds far more than its size suggests: whoever wears it gains carrying capacity for inventory and caravans. How much depends on how psychically sensitive its maker was.</description>
+		<techLevel>Archotech</techLevel>
+		<graphicData>
+			<texPath>Spatialist/Things/SpatialBag/SpatialBag</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<tradeability>Sellable</tradeability>
+		<generateAllowChance>0</generateAllowChance>
+		<thingCategories>
+			<li>ApparelUtility</li>
+		</thingCategories>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<Mass>1</Mass>
+			<MarketValue>1200</MarketValue>
+			<Flammability>0.2</Flammability>
+			<EquipDelay>2</EquipDelay>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<comps>
+			<li Class="Spatialist.CompProperties_SpatialBag">
+				<baseCapacity>100</baseCapacity>
+			</li>
+		</comps>
+		<apparel>
+			<wornGraphicPath>Spatialist/Things/SpatialBag/SpatialBag</wornGraphicPath>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<wearPerDay>0</wearPerDay>
+			<!-- Same layer and body group as backpacks (e.g. VAE Accessories'), so the two can't be worn together. -->
+			<bodyPartGroups>
+				<li>Torso</li>
+			</bodyPartGroups>
+			<layers>
+				<li>Belt</li>
+			</layers>
+			<wornGraphicData>
+				<renderUtilityAsPack>true</renderUtilityAsPack>
+				<north>
+					<offset>(0,-0.05)</offset>
+				</north>
+				<south>
+					<offset>(0,0.15)</offset>
+				</south>
+				<east>
+					<offset>(-0.35,-0.05)</offset>
+					<thin><offset>(0.05,0)</offset></thin>
+					<hulk><offset>(-0.1,0)</offset></hulk>
+					<fat><offset>(-0.15,0)</offset></fat>
+				</east>
+				<west>
+					<offset>(0.35,-0.05)</offset>
+					<thin><offset>(-0.05,0)</offset></thin>
+					<hulk><offset>(0.1,0)</offset></hulk>
+					<fat><offset>(0.15,0)</offset></fat>
+				</west>
+				<male><scale>(0.8,0.8)</scale></male>
+				<female><scale>(0.8,0.8)</scale></female>
+				<thin><scale>(0.75,0.75)</scale></thin>
+				<hulk><scale>(0.95,0.95)</scale></hulk>
+				<fat><scale>(0.95,0.95)</scale></fat>
+			</wornGraphicData>
+		</apparel>
+	</ThingDef>
+
+</Defs>

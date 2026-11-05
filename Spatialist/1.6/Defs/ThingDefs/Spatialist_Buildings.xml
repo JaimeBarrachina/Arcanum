@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Spatialist_PocketGate</defName>
+		<label>pocket gate</label>
+		<description>A stone gateway raised by psychic will, its opening filled with light from a spatialist's personal pocket dimension. It stays open until its maker closes it.</description>
+		<thingClass>Spatialist.Building_PocketGate</thingClass>
+		<size>(1,1)</size>
+		<rotatable>false</rotatable>
+		<graphicData>
+			<texPath>Spatialist/Things/PocketGate</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+			<!-- The gate stands upright: lift it so its base sits on its tile and the top rises above. -->
+			<drawSize>(1.6,1.6)</drawSize>
+			<drawOffset>(0,0,0.3)</drawOffset>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Impassable</passability>
+		<fillPercent>0</fillPercent>
+		<useHitPoints>false</useHitPoints>
+		<destroyable>false</destroyable>
+		<holdsRoof>false</holdsRoof>
+		<canOverlapZones>false</canOverlapZones>
+		<tickerType>Normal</tickerType>
+		<building>
+			<isEdifice>true</isEdifice>
+			<deconstructible>false</deconstructible>
+			<isTargetable>false</isTargetable>
+			<isInert>true</isInert>
+			<claimable>false</claimable>
+			<expandHomeArea>false</expandHomeArea>
+		</building>
+		<statBases>
+			<Flammability>0</Flammability>
+		</statBases>
+		<portal>
+			<pocketMapGenerator>Spatialist_PocketMap</pocketMapGenerator>
+			<exitDef>Spatialist_PocketExit</exitDef>
+			<pocketMapSize>15</pocketMapSize>
+			<traverseSound>Psycast_Skip_Exit</traverseSound>
+		</portal>
+		<comps>
+			<li Class="CompProperties_Glower">
+				<glowRadius>3</glowRadius>
+				<glowColor>(140,160,255,0)</glowColor>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="PocketMapExit">
+		<defName>Spatialist_PocketExit</defName>
+		<label>pocket exit</label>
+		<description>The way back out of the pocket dimension. It only works while the gate outside is open.</description>
+		<thingClass>Spatialist.Building_PocketExit</thingClass>
+		<size>(1,1)</size>
+		<graphicData>
+			<texPath>Spatialist/Things/PocketGate</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+			<!-- The gate stands upright: lift it so its base sits on its tile and the top rises above. -->
+			<drawSize>(1.6,1.6)</drawSize>
+			<drawOffset>(0,0,0.3)</drawOffset>
+		</graphicData>
+		<statBases>
+			<Flammability>0</Flammability>
+		</statBases>
+		<comps>
+			<!-- The pocket has no sky; this lights the whole 15x15 room from the middle. -->
+			<li Class="CompProperties_Glower">
+				<glowRadius>12</glowRadius>
+				<glowColor>(217,217,230,0)</glowColor>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<!-- Fills the unopened part of the 45x45 pocket. Expand Pocket removes it ring by ring. -->
+	<ThingDef ParentName="BuildingBase">
+		<defName>Spatialist_PocketWall</defName>
+		<label>folded space</label>
+		<description>Space folded so tightly it might as well be solid stone. The spatialist who owns this pocket can push it back.</description>
+		<thingClass>Building</thingClass>
+		<!-- Vanilla's rock atlas, loaded from the game and tinted; links like natural rock. -->
+		<graphicData>
+			<texPath>Things/Building/Linked/Rock_Atlas</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<linkType>CornerFiller</linkType>
+			<linkFlags>
+				<li>Rock</li>
+				<li>MapEdge</li>
+			</linkFlags>
+			<color>(88,76,110)</color>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Impassable</passability>
+		<blockWind>true</blockWind>
+		<blockLight>true</blockLight>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>1.0</staticSunShadowHeight>
+		<fillPercent>1</fillPercent>
+		<coversFloor>true</coversFloor>
+		<holdsRoof>true</holdsRoof>
+		<neverMultiSelect>true</neverMultiSelect>
+		<rotatable>false</rotatable>
+		<selectable>false</selectable>
+		<saveCompressible>true</saveCompressible>
+		<useHitPoints>false</useHitPoints>
+		<destroyable>false</destroyable>
+		<building>
+			<isEdifice>true</isEdifice>
+			<isInert>true</isInert>
+			<deconstructible>false</deconstructible>
+			<claimable>false</claimable>
+			<isTargetable>false</isTargetable>
+			<expandHomeArea>false</expandHomeArea>
+		</building>
+		<statBases>
+			<Flammability>0</Flammability>
+		</statBases>
+	</ThingDef>
+
+	<!-- Placed along the inner edge of each newly opened ring, so an expanded pocket isn't dark at the edges. -->
+	<ThingDef ParentName="BuildingBase">
+		<defName>Spatialist_LightCrystal</defName>
+		<label>pocket crystal</label>
+		<description>A cluster of amethyst crystals that grew where the pocket's walls were pushed back. It glows softly with folded light.</description>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Spatialist/Things/LightCrystal</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+			<drawSize>(1,1)</drawSize>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>30</pathCost>
+		<fillPercent>0.2</fillPercent>
+		<rotatable>false</rotatable>
+		<useHitPoints>false</useHitPoints>
+		<destroyable>false</destroyable>
+		<building>
+			<isInert>true</isInert>
+			<deconstructible>false</deconstructible>
+			<claimable>false</claimable>
+			<isTargetable>false</isTargetable>
+			<expandHomeArea>false</expandHomeArea>
+		</building>
+		<statBases>
+			<Flammability>0</Flammability>
+			<Beauty>8</Beauty>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(200,170,255,0)</glowColor>
+			</li>
+		</comps>
+	</ThingDef>
+
+</Defs>

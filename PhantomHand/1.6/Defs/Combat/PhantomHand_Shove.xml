@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- Thousand Palms' shove: a blunt hit that knocks the target back, via VEF's push-back damage worker. -->
+	<ToolCapacityDef>
+		<defName>PH_Shove</defName>
+		<label>shove</label>
+	</ToolCapacityDef>
+
+	<ManeuverDef>
+		<defName>PH_Shove</defName>
+		<requiredCapacity>PH_Shove</requiredCapacity>
+		<verb>
+			<verbClass>Verb_MeleeAttackDamage</verbClass>
+			<meleeDamageDef>PH_Shove</meleeDamageDef>
+		</verb>
+		<logEntryDef>MeleeAttack</logEntryDef>
+		<combatLogRulesHit>Maneuver_Smash_MeleeHit</combatLogRulesHit>
+		<combatLogRulesDeflect>Maneuver_Smash_MeleeDeflect</combatLogRulesDeflect>
+		<combatLogRulesMiss>Maneuver_Smash_MeleeMiss</combatLogRulesMiss>
+		<combatLogRulesDodge>Maneuver_Smash_MeleeDodge</combatLogRulesDodge>
+	</ManeuverDef>
+
+	<DamageDef ParentName="BluntBase">
+		<defName>PH_Shove</defName>
+		<label>shove</label>
+		<workerClass>VEF.Weapons.DamageWorker_PushBackAttackMelee</workerClass>
+		<modExtensions>
+			<li Class="VEF.Weapons.DamageExtension">
+				<pushBackDistance>1~2</pushBackDistance>
+			</li>
+		</modExtensions>
+	</DamageDef>
+
+</Defs>

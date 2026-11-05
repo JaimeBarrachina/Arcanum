@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- Card layout (VPE rows hold 1-3 slots: x = 0 | -29,+29 | -51,0,+51):
+	       L1 Busy Hands (0)
+	       L2 Timber Hands (-29)                                   Rescue Hands (+29)
+	       L3 Construction Crew (-51)   Miner Hands (0)            Grasping Hands (+51)
+	       L4 Telekinetic Aura (-29), from Construction or Miner   Thousand Palms (+29)
+	       L5 The Hundred-Handed (0), reachable from either L4 psycast (VPE prerequisites are any-one).
+	     Lines: Timber->Construction, Timber->Miner, Construction->Aura, Miner->Aura, Rescue->Grasping->Palms.
+	     No lines cross or run under an icon; re-check before adding or moving a psycast.
+	     Summon curves all take the caster's psychic sensitivity; their end points are the caps. -->
+
+	<!-- ===================== L1 ===================== -->
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>PH_BusyHands</defName>
+		<label>busy hands</label>
+		<description>Summon a few phantom hands that haul items to storage anywhere on the map, following the colony's hauling priorities. They glide over any terrain at great speed and fade after about an hour.\n\nMore psychic sensitivity summons more hands (2 to 6) and makes them faster. Casting again refreshes the hands instead of adding more.</description>
+		<iconPath>PhantomHand/Abilities/BusyHands</iconPath>
+		<abilityClass>PhantomHand.Ability_SummonHands</abilityClass>
+		<targetMode>Self</targetMode>
+		<showUndrafted>true</showUndrafted>
+		<castTime>60</castTime>
+		<castSound>Psycast_Skip_Entry</castSound>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>PH_PhantomHandPath</path>
+				<level>1</level>
+				<order>1</order>
+				<psyfocusCost>0.02</psyfocusCost>
+				<entropyGain>10</entropyGain>
+			</li>
+			<li Class="PhantomHand.PhantomSummonExtension">
+				<kind>PH_BusyHand</kind>
+				<durationTicks>2500</durationTicks>
+				<count>
+					<points>
+						<li>(0.5, 2)</li>
+						<li>(1, 3)</li>
+						<li>(2, 5)</li>
+						<li>(3, 6)</li>
+					</points>
+				</count>
+				<skill>
+					<points>
+						<li>(0.5, 4)</li>
+						<li>(1, 8)</li>
+						<li>(2, 12)</li>
+						<li>(3, 15)</li>
+					</points>
+				</skill>
+				<speed>
+					<points>
+						<li>(0.5, 0.85)</li>
+						<li>(1, 1)</li>
+						<li>(2.5, 1.3)</li>
+					</points>
+				</speed>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+	<!-- ===================== L2 ===================== -->
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>PH_TimberHands</defName>
+		<label>timber hands</label>
+		<description>Summon phantom hands that cut every tree and plant marked for cutting, anywhere on the map. They fade after about an hour.\n\nMore psychic sensitivity summons more hands (2 to 6) and makes them faster and more skilled.</description>
+		<iconPath>PhantomHand/Abilities/TimberHands</iconPath>
+		<abilityClass>PhantomHand.Ability_SummonHands</abilityClass>
+		<targetMode>Self</targetMode>
+		<showUndrafted>true</showUndrafted>
+		<castTime>60</castTime>
+		<castSound>Psycast_Skip_Entry</castSound>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>PH_PhantomHandPath</path>
+				<level>2</level>
+				<order>1</order>
+				<psyfocusCost>0.03</psyfocusCost>
+				<entropyGain>12</entropyGain>
+				<prerequisites>
+					<li>PH_BusyHands</li>
+				</prerequisites>
+			</li>
+			<li Class="PhantomHand.PhantomSummonExtension">
+				<kind>PH_TimberHand</kind>
+				<durationTicks>2500</durationTicks>
+				<count>
+					<points>
+						<li>(0.5, 2)</li>
+						<li>(1, 3)</li>
+						<li>(2, 5)</li>
+						<li>(3, 6)</li>
+					</points>
+				</count>
+				<skill>
+					<points>
+						<li>(0.5, 4)</li>
+						<li>(1, 8)</li>
+						<li>(2, 12)</li>
+						<li>(3, 15)</li>
+					</points>
+				</skill>
+				<speed>
+					<points>
+						<li>(0.5, 0.85)</li>
+						<li>(1, 1)</li>
+						<li>(2.5, 1.3)</li>
+					</points>
+				</speed>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>PH_RescueHands</defName>
+		<label>rescue hands</label>
+		<description>Summon phantom hands that find downed allies anywhere on the map and carry them to a hospital bed. Unlike colonists, they go in even when enemies are close. They fade after about half an hour, but a hand carrying someone gets a little extra time to reach the bed.\n\nMore psychic sensitivity summons more hands (1 to 4) and makes them faster.</description>
+		<iconPath>PhantomHand/Abilities/RescueHands</iconPath>
+		<abilityClass>PhantomHand.Ability_SummonHands</abilityClass>
+		<targetMode>Self</targetMode>
+		<showUndrafted>true</showUndrafted>
+		<castTime>30</castTime>
+		<castSound>Psycast_Skip_Entry</castSound>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>PH_PhantomHandPath</path>
+				<level>2</level>
+				<order>2</order>
+				<psyfocusCost>0.02</psyfocusCost>
+				<entropyGain>10</entropyGain>
+				<prerequisites>
+					<li>PH_BusyHands</li>
+				</prerequisites>
+			</li>
+			<li Class="PhantomHand.PhantomSummonExtension">
+				<kind>PH_RescueHand</kind>
+				<durationTicks>1250</durationTicks>
+				<count>
+					<points>
+						<li>(0.5, 1)</li>
+						<li>(1, 2)</li>
+						<li>(2, 3)</li>
+						<li>(3, 4)</li>
+					</points>
+				</count>
+				<skill>
+					<points>
+						<li>(1, 8)</li>
+					</points>
+				</skill>
+				<speed>
+					<points>
+						<li>(0.5, 0.85)</li>
+						<li>(1, 1)</li>
+						<li>(2.5, 1.3)</li>
+					</points>
+				</speed>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+	<!-- ===================== L3 ===================== -->
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>PH_ConstructionCrew</defName>
+		<label>phantom construction crew</label>
+		<description>Summon phantom hands that build, deliver building materials and repair damaged structures anywhere on the map. Their skill sets the quality of what they build and which buildings they can attempt. They fade after about an hour.\n\nMore psychic sensitivity summons more hands (2 to 6) and makes them faster and more skilled (construction skill 4 to 15).</description>
+		<iconPath>PhantomHand/Abilities/ConstructionCrew</iconPath>
+		<abilityClass>PhantomHand.Ability_SummonHands</abilityClass>
+		<targetMode>Self</targetMode>
+		<showUndrafted>true</showUndrafted>
+		<castTime>60</castTime>
+		<castSound>Psycast_Skip_Entry</castSound>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>PH_PhantomHandPath</path>
+				<level>3</level>
+				<order>1</order>
+				<psyfocusCost>0.04</psyfocusCost>
+				<entropyGain>15</entropyGain>
+				<prerequisites>
+					<li>PH_TimberHands</li>
+				</prerequisites>
+			</li>
+			<li Class="PhantomHand.PhantomSummonExtension">
+				<kind>PH_BuilderHand</kind>
+				<durationTicks>2500</durationTicks>
+				<count>
+					<points>
+						<li>(0.5, 2)</li>
+						<li>(1, 3)</li>
+						<li>(2, 5)</li>
+						<li>(3, 6)</li>
+					</points>
+				</count>
+				<skill>
+					<points>
+						<li>(0.5, 4)</li>
+						<li>(1, 8)</li>
+						<li>(2, 12)</li>
+						<li>(3, 15)</li>
+					</points>
+				</skill>
+				<speed>
+					<points>
+						<li>(0.5, 0.85)</li>
+						<li>(1, 1)</li>
+						<li>(2.5, 1.3)</li>
+					</points>
+				</speed>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>PH_MinerHands</defName>
+		<label>miner hands</label>
+		<description>Summon phantom hands that dig out every rock and ore vein marked for mining, anywhere on the map. Their skill sets how fast they dig and how much they yield. They fade after about an hour. They won't operate deep drills.\n\nMore psychic sensitivity summons more hands (2 to 6) and makes them faster and more skilled (mining skill 4 to 15).</description>
+		<iconPath>PhantomHand/Abilities/MinerHands</iconPath>
+		<abilityClass>PhantomHand.Ability_SummonHands</abilityClass>
+		<targetMode>Self</targetMode>
+		<showUndrafted>true</showUndrafted>
+		<castTime>60</castTime>
+		<castSound>Psycast_Skip_Entry</castSound>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>PH_PhantomHandPath</path>
+				<level>3</level>
+				<order>2</order>
+				<psyfocusCost>0.04</psyfocusCost>
+				<entropyGain>15</entropyGain>
+				<prerequisites>
+					<li>PH_TimberHands</li>
+				</prerequisites>
+			</li>
+			<li Class="PhantomHand.PhantomSummonExtension">
+				<kind>PH_MinerHand</kind>
+				<durationTicks>2500</durationTicks>
+				<count>
+					<points>
+						<li>(0.5, 2)</li>
+						<li>(1, 3)</li>
+						<li>(2, 5)</li>
+						<li>(3, 6)</li>
+					</points>
+				</count>
+				<skill>
+					<points>
+						<li>(0.5, 4)</li>
+						<li>(1, 8)</li>
+						<li>(2, 12)</li>
+						<li>(3, 15)</li>
+					</points>
+				</skill>
+				<speed>
+					<points>
+						<li>(0.5, 0.85)</li>
+						<li>(1, 1)</li>
+						<li>(2.5, 1.3)</li>
+					</points>
+				</speed>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>PH_GraspingHands</defName>
+		<label>grasping hands</label>
+		<description>Hands of force seize every enemy in the target area. Seized creatures can barely move, and their manipulation and aim suffer, for about 10 seconds.\n\nThe hold lasts longer with more psychic sensitivity.</description>
+		<iconPath>PhantomHand/Abilities/GraspingHands</iconPath>
+		<abilityClass>PhantomHand.Ability_GraspingHands</abilityClass>
+		<targetMode>Location</targetMode>
+		<range>24.9</range>
+		<radius>3.9</radius>
+		<durationTime>600</durationTime>
+		<durationTimeStatFactors>
+			<PsychicSensitivity>1</PsychicSensitivity>
+		</durationTimeStatFactors>
+		<castTime>30</castTime>
+		<castSound>PsycastPsychicEffect</castSound>
+		<castFleck>PsycastAreaEffect</castFleck>
+		<castFleckScaleWithRadius>true</castFleckScaleWithRadius>
+		<targetingParameters>
+			<canTargetLocations>true</canTargetLocations>
+			<canTargetPawns>true</canTargetPawns>
+			<canTargetBuildings>false</canTargetBuildings>
+		</targetingParameters>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>PH_PhantomHandPath</path>
+				<level>3</level>
+				<order>3</order>
+				<psyfocusCost>0.03</psyfocusCost>
+				<entropyGain>15</entropyGain>
+				<prerequisites>
+					<li>PH_RescueHands</li>
+				</prerequisites>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+	<!-- ===================== L4 ===================== -->
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>PH_TelekineticAura</defName>
+		<label>telekinetic aura</label>
+		<description>Sustain a telekinetic field. Every 20 seconds a working hand forms out of it: a hauler, cutter, builder or miner, picked from whatever work is waiting. The number of hands at once grows with psychic sensitivity (2 to 6).\n\nWhile the aura lasts, 30 of the caster's neural heat stays locked and can't dissipate. Use the psycast again to end it, at no cost. It also ends if the caster is downed or leaves the map, and its hands fade with it.</description>
+		<iconPath>PhantomHand/Abilities/TelekineticAura</iconPath>
+		<abilityClass>PhantomHand.Ability_TelekineticAura</abilityClass>
+		<targetMode>Self</targetMode>
+		<showUndrafted>true</showUndrafted>
+		<castTime>60</castTime>
+		<castSound>Psycast_Skip_Entry</castSound>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>PH_PhantomHandPath</path>
+				<level>4</level>
+				<order>1</order>
+				<psyfocusCost>0.10</psyfocusCost>
+				<entropyGain>0</entropyGain>
+				<prerequisites>
+					<li>PH_ConstructionCrew</li>
+					<li>PH_MinerHands</li>
+				</prerequisites>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>PH_ThousandPalms</defName>
+		<label>thousand palms</label>
+		<description>Summon a swarm of battle hands. Each one carries a small shield that catches incoming bullets, strikes with rapid blows and shoves enemies back. They fade after about 25 seconds.\n\nMore psychic sensitivity summons more hands (3 to 8) and makes them faster and better fighters.</description>
+		<iconPath>PhantomHand/Abilities/ThousandPalms</iconPath>
+		<abilityClass>PhantomHand.Ability_SummonHands</abilityClass>
+		<targetMode>Self</targetMode>
+		<castTime>30</castTime>
+		<castSound>Psycast_Skip_Entry</castSound>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>PH_PhantomHandPath</path>
+				<level>4</level>
+				<order>2</order>
+				<psyfocusCost>0.05</psyfocusCost>
+				<entropyGain>25</entropyGain>
+				<prerequisites>
+					<li>PH_GraspingHands</li>
+				</prerequisites>
+			</li>
+			<li Class="PhantomHand.PhantomSummonExtension">
+				<kind>PH_PalmHand</kind>
+				<durationTicks>1500</durationTicks>
+				<count>
+					<points>
+						<li>(0.5, 3)</li>
+						<li>(1, 4)</li>
+						<li>(2, 7)</li>
+						<li>(3, 8)</li>
+					</points>
+				</count>
+				<skill>
+					<points>
+						<li>(0.5, 5)</li>
+						<li>(1, 9)</li>
+						<li>(2, 13)</li>
+						<li>(3, 16)</li>
+					</points>
+				</skill>
+				<speed>
+					<points>
+						<li>(0.5, 0.85)</li>
+						<li>(1, 1)</li>
+						<li>(2.5, 1.3)</li>
+					</points>
+				</speed>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+	<!-- ===================== L5 ===================== -->
+	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+		<defName>PH_HundredHanded</defName>
+		<label>the hundred-handed</label>
+		<description>Summon a vast swarm of phantom hands. While enemies threaten the colony they fight, shield and rescue the wounded; otherwise they haul, cut plants, build and mine. A brief, overwhelming burst: they fade after about half a minute, and the psycast can be used once a day.\n\nMore psychic sensitivity summons more hands (20 to 40) and makes them faster and more skilled.</description>
+		<iconPath>PhantomHand/Abilities/HundredHanded</iconPath>
+		<abilityClass>PhantomHand.Ability_SummonHands</abilityClass>
+		<targetMode>Self</targetMode>
+		<showUndrafted>true</showUndrafted>
+		<castTime>90</castTime>
+		<cooldownTime>60000</cooldownTime>
+		<castSound>Psycast_Skip_Entry</castSound>
+		<modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>PH_PhantomHandPath</path>
+				<level>5</level>
+				<order>1</order>
+				<psyfocusCost>0.50</psyfocusCost>
+				<entropyGain>60</entropyGain>
+				<prerequisites>
+					<li>PH_TelekineticAura</li>
+					<li>PH_ThousandPalms</li>
+				</prerequisites>
+			</li>
+			<li Class="PhantomHand.PhantomSummonExtension">
+				<kind>PH_HundredHand</kind>
+				<durationTicks>2000</durationTicks>
+				<count>
+					<points>
+						<li>(0.5, 14)</li>
+						<li>(1, 20)</li>
+						<li>(2, 32)</li>
+						<li>(3, 40)</li>
+					</points>
+				</count>
+				<skill>
+					<points>
+						<li>(0.5, 6)</li>
+						<li>(1, 10)</li>
+						<li>(2, 14)</li>
+						<li>(3, 17)</li>
+					</points>
+				</skill>
+				<speed>
+					<points>
+						<li>(0.5, 0.9)</li>
+						<li>(1, 1.05)</li>
+						<li>(2.5, 1.35)</li>
+					</points>
+				</speed>
+			</li>
+		</modExtensions>
+	</VEF.Abilities.AbilityDef>
+
+</Defs>
