@@ -15,7 +15,7 @@
 	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
 		<defName>PH_BusyHands</defName>
 		<label>busy hands</label>
-		<description>Summon a few phantom hands that haul items to storage anywhere on the map, following the colony's hauling priorities. They glide over any terrain at great speed and fade after about an hour.\n\nMore psychic sensitivity summons more hands (2 to 6) and makes them faster. Casting again refreshes the hands instead of adding more.</description>
+		<description>Summon a few phantom hands that haul items to storage anywhere on the map, following the colony's hauling priorities. They move fast, even through mud and shallow water, and fade after about an hour.\n\nMore psychic sensitivity summons more hands (2 to 6) and makes them faster. Casting again refreshes the hands instead of adding more.</description>
 		<iconPath>PhantomHand/Abilities/BusyHands</iconPath>
 		<abilityClass>PhantomHand.Ability_SummonHands</abilityClass>
 		<targetMode>Self</targetMode>

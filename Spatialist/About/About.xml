@@ -15,7 +15,7 @@ Psycasts:
 - Stash: skip an item stack into the pocket without opening the gate. Cast from inside the pocket, it skips items out next to the gate, which must be open.
 - Displace: Stash for every item in a 3x3 area.
 - Expand Pocket: grow the pocket from 15x15 to 25x25, 35x35 and finally 45x45.
-- Sanctuary: skip the caster and every colonist, guest and prisoner within 5 cells into the pocket.
+- Sanctuary: skip the caster into the pocket along with every colonist, colony animal, mechanoid, prisoner and guest within 5 cells.
 - Spatial Bag: make a backpack that adds 100 kg of carrying capacity at 100% psychic sensitivity, scaling with the caster's sensitivity. It costs 200 neural heat, so turn the heat limiter off to cast it.
 
 Good to know:

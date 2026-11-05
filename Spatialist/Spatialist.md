@@ -34,7 +34,7 @@ The folder is junctioned into `RimWorld\Mods\Spatialist`.
 - `HarmonyPatches` (roof): prefixes on `RoofCollapseCellsFinder.ProcessRoofHolderDespawned` and the private `CheckCollapseFlyingRoofAtAndAdjInternal` skip our pocket maps, so roofs there never collapse. `WorldComponent_PocketDimensions.RepairRoof` re-roofs the open area and clears `CollapsedRocks` on every open and expand.
 - `HarmonyPatches`: `GenGrid.InNoZoneEdgeArea` (vanilla bans zones within 5 cells of the map edge, even in pocket maps; we lift that for our maps only) and `WorldComponent_GravshipController.InitiateTakeoff` (close gates on the launching map and eject pawns next to the grav engine).
 
-General paths, tooling and research notes live in [../Mods.md](../Mods.md).
+General paths, tooling and research notes live in [../Private/Mods.md](../Private/Mods.md) (local only, not in the repo).
 
 ## Design decisions
 
@@ -170,7 +170,7 @@ All generated with Codex image generation (`Tools/codex_image.py`); jobs, raw ou
 | `About/Preview.png` | 1280x720 | `Art/raw/preview_v2.png` (v1's composition with the stone gate; the hauler wears a Spatial Bag) | Reduced to 256 colours with dither to fit Steam's 1 MB preview limit (397 KB); full-colour versions are in `Art/final/`. |
 | `About/ModIcon.png` | 128 | copy of the Pocket Gate icon | |
 
-House style for future Spatialist art: muted lavender-grey and amethyst (#7a5aa6 family). **The stone gate is the path's motif.** Icons get thick near-black outlines, flat two-tone fills and chunky silhouettes (pass `Art/refs/ref_vpe_icons.png`, `Art/raw/icons_v2.png` and `Art/final/PocketGate_v2.png` as `--ref`). Opaque sprites are drawn on #00FF00 and keyed with `chroma_key.py`. Pure glow effects are drawn on black and keyed with `alpha_from_black.py`.
+House style for future Spatialist art: muted lavender-grey and amethyst (#7a5aa6 family). **The stone gate is the path's motif.** Icons get thick near-black outlines, flat two-tone fills and chunky silhouettes (pass `../Private/refs/Spatialist/ref_vpe_icons.png` (third-party, kept out of the public repo), `Art/raw/icons_v2.png` and `Art/final/PocketGate_v2.png` as `--ref`). Opaque sprites are drawn on #00FF00 and keyed with `chroma_key.py`. Pure glow effects are drawn on black and keyed with `alpha_from_black.py`.
 
 ## Before publishing
 

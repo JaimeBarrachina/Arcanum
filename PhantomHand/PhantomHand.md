@@ -4,7 +4,7 @@ A Vanilla Psycasts Expanded path that summons short-lived telekinetic hands. The
 
 Status: **all 9 psycasts built on 2026-11-03 (Miner Hands added the same day). It compiles and the XML resolves. Playtest round 1 (Busy Hands) ran on 2026-11-03; see the playtest log. Miner Hands is untested.** Final art (icons, hand sprite, path background) was done the same day; the Workshop preview and mod icon are still to do. Target: RimWorld 1.6. Tab: `Arcanum` (shared with Spatialist; was `Arcane` until 2026-11-05).
 
-General paths, tooling and research notes live in [../Mods.md](../Mods.md) (sections "Temporary / autonomous worker pawns" and "Vanilla 1.6 summoned-worker research").
+General paths, tooling and research notes live in [../Private/Mods.md](../Private/Mods.md) (local only, not in the repo; sections "Temporary / autonomous worker pawns" and "Vanilla 1.6 summoned-worker research").
 
 ## Layout
 
@@ -108,6 +108,8 @@ All of it was generated with Codex image generation (`../Tools/codex_image.py`, 
 | `Textures/PhantomHand/Abilities/MinerHands` | 128 | `Art/raw/icon_miner_v1.png` (one icon; sheets A and B v2 as references), split and padded to square | Passed the family check against its 8 siblings first time. |
 | `Textures/PhantomHand/Things/Hand_south`, `_east`, `_north` | 256 | `Art/raw/sprite_v1.png` (drawn on black), keyed with `../Tools/alpha_from_black.py`, cut by grid at one shared scale | Near-white on purpose: each hand kind is tinted by `graphicData color`. |
 | `Textures/PhantomHand/UI/PathBackground.png` (background and altBackground) | 950x1515 | `Art/raw/background_v2.png` via `../Tools/fit_cover.py` | v1 had the right emblem but a thin frame and no black panel border. v2 copies VPE's frame from PathBG_Archon, Chronopath and Skipmaster. |
+| `About/Preview.png` | 1280x720 | `Art/raw/preview_v1.png` (made by the user from `Art/jobs/preview_v1.md` after Codex image generation kept failing with network errors on 2026-11-05), `fit_cover.py`, 256-colour Floyd-Steinberg dither (507 KB) | Full colour in `Art/final/Preview_1280_fullcolour.png`. Shows a hand sowing seeds, though the mod has no planting hands; the user accepted it as artistic licence (2026-11-05), so leave it. |
+| `About/ModIcon.png` | 128 | copy of the Busy Hands icon | |
 
 Pipeline notes:
 - **Cut icon sheets by grid** (scratchpad `grid_split.py`: crop each 2x2 cell, then run Necro's splitter on that cell). The splitter's `--merge-distance` either splits multi-part icons or merges neighbouring cells.

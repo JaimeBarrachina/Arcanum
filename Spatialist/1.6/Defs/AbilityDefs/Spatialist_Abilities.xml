@@ -120,7 +120,7 @@
 	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
 		<defName>Spatialist_ExpandPocket</defName>
 		<label>expand pocket</label>
-		<description>Push back the walls of the caster's pocket dimension, opening the next ring of space and lighting it with amethyst crystals. Each cast grows the pocket from 15x15 to 25x25, 35x35 and finally 45x45.\n\nPockets made before this psycast existed can't grow.</description>
+		<description>Push back the walls of the caster's pocket dimension, opening the next ring of space and lighting it with amethyst crystals. Each cast grows the pocket from 15x15 to 25x25, 35x35 and finally 45x45.</description>
 		<iconPath>Spatialist/Abilities/ExpandPocket</iconPath>
 		<abilityClass>Spatialist.Ability_ExpandPocket</abilityClass>
 		<targetMode>Self</targetMode>
@@ -146,7 +146,7 @@
 	<VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
 		<defName>Spatialist_Sanctuary</defName>
 		<label>sanctuary</label>
-		<description>Skip the caster and everyone friendly around them (colonists, prisoners, colony animals and mechanoids) into the caster's pocket dimension. The gate doesn't need to be open, but someone has to open it again to get back out.\n\nRequires the pocket to exist (cast Pocket Gate at least once).</description>
+		<description>Skip the caster and everyone friendly around them (colonists, colony animals and mechanoids, prisoners and guests) into the caster's pocket dimension. The gate doesn't need to be open, but someone has to open it again to get back out.\n\nRequires the pocket to exist (cast Pocket Gate at least once).</description>
 		<iconPath>Spatialist/Abilities/Sanctuary</iconPath>
 		<abilityClass>Spatialist.Ability_Sanctuary</abilityClass>
 		<targetMode>Self</targetMode>
